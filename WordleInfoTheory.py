@@ -18,11 +18,12 @@ class WordleSolver():
     def __get_freqs(self, letter):
         return ''.join(self.valid_words).count(letter)/(5*len(self.valid_words))
     
-    def __strategy_minimise_entropy(self, word):
-        return -sum([self.freqs[letter]*shan_l2(self.freqs[letter]) for letter in set(word)])
+    @staticmethod
+    def __strategy_minimise_entropy(solver, word):
+        return -sum([solver.freqs[letter]*shan_l2(solver.freqs[letter]) for letter in set(word)])
     
     def __score(self, word):
-        return self.strategy(word)
+        return self.strategy(self,word)
     
     def guess(self, n_top_guesses=1):
         rankings = {word:self.__score(word) for word in self.valid_words}

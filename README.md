@@ -2,6 +2,8 @@
 
 ### Small Python package to solve Wordle puzzles using Shannon entropy of the potential solutions
 
+(dependencies: python3, numpy)
+
 ---
 
 ### Context
@@ -53,10 +55,10 @@ where `'guess'` is the word guessed (as a string), and the second argument is a 
 
 The previous two steps can be repeated until the solution is reached, usually in around 3 guesses.
 
-A custom strategy may be supplied when creating the solver object to be used in place of the default entropy-based solver. It must be a function which takes one input, a 5 letter string, and returns a numerical score where the word with the highest score is the most desirable guess.
+A custom strategy may be supplied when creating the solver object to be used in place of the default entropy-based solver. It must be a function which takes two inputs, the solver itself (to provide access to internal class attributes), and a given word which must be a 5 letter string. It must return a numerical score associated with the word, where the word the highest score corresponds to the most desirable guess.
 
 ```
-def some_strategy(word):
+def some_strategy(solver, word):
     ...
     return score
 
